@@ -99,7 +99,7 @@ $result = $conn->query("SELECT * FROM users");
     <div class="container">
         <h2>Add User</h2>
         <form action="add.php" method="post">
-            <input type="text" name="name" placeholder="Enter name" required>
+            <input type="text" name="name" placeholder="Enter your name" required>
             <input type="email" name="email" placeholder="Enter email" required>
             <input type="number" name="age" placeholder="Enter age" required>
             <input type="submit" value="Add User">
