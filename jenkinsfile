@@ -1,16 +1,25 @@
 pipeline {
     agent any
 
+    environment {
+        COMPOSE_PROJECT_NAME = 'lamp-app-ci'
+        COMPOSE_FILE = 'docker-compose.yml'
+    }
+
     stages {
-        stage('Clone from GitHub') {
+        stage('Clone Repository') {
             steps {
-                git 'https://github.com/yourusername/your-repo-name.git'
+                git branch: 'main', url: 'https://github.com/Aiman-Syed-2001/lamp-app.git'
             }
         }
 
-        stage('Build & Run with Docker Compose') {
+        stage('Build and Deploy Containers') {
             steps {
-                sh 'docker-compose -p part2project -f docker-compose.yml up -d --build'
+                script {
+                    sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} down || true"
+                    sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} build --no-cache"
+                    sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} up -d --remove-orphans"
+                }
             }
         }
     }
