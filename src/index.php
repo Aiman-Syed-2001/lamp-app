@@ -6,7 +6,7 @@ $result = $conn->query("SELECT * FROM users");
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User CRUD App</title>
+    <title>User App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
